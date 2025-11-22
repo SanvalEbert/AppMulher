@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Smartphone, Monitor, MessageCircle, User } from 'lucide-react';
+import { Menu, X, Shield, ExternalLink } from 'lucide-react';
 
 // Import pages
 import Home from './pages/Home';
 import Types from './pages/Types';
+import Signs from './pages/Signs';
 import Help from './pages/Help';
 import Legislation from './pages/Legislation';
 import MapPage from './pages/Map';
 import FAQ from './pages/FAQ';
-import Contact from './pages/Contact';
 import Sitemap from './pages/Sitemap';
 import Documentation from './pages/Documentation';
 
@@ -17,13 +17,19 @@ const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolea
   const location = useLocation();
   const isActive = location.pathname === to;
   
+  const baseStyles = "text-sm font-medium transition-colors duration-200";
+  const desktopStyles = isActive 
+    ? "text-white bg-brand-800 px-3 py-2 rounded-md shadow-sm" 
+    : "text-brand-100 hover:text-white hover:bg-brand-800/50 px-3 py-2 rounded-md";
+  const mobileStyles = isActive 
+    ? "block w-full text-left px-4 py-3 bg-brand-50 text-brand-900 font-bold border-l-4 border-brand-900" 
+    : "block w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-brand-900 border-l-4 border-transparent";
+
   return (
     <Link 
       to={to} 
       onClick={onClick}
-      className={`${mobile ? 'block py-3 border-b border-gray-200' : 'px-3 py-1'} 
-        ${isActive ? 'bg-black text-white font-bold' : 'text-black hover:bg-gray-200'} 
-        text-sm uppercase tracking-wide transition-colors`}
+      className={`${mobile ? mobileStyles : desktopStyles} ${baseStyles}`}
     >
       {children}
     </Link>
@@ -32,106 +38,151 @@ const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolea
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop');
 
   // Close mobile menu on route change
   const location = useLocation();
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
   }, [location]);
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-all duration-300 
-      ${viewMode === 'mobile' ? 'max-w-[400px] mx-auto border-x-8 border-gray-800 my-8 shadow-2xl rounded-3xl overflow-hidden bg-white min-h-[800px] relative print:max-w-full print:border-0 print:shadow-none print:my-0 print:rounded-none' : 'bg-white'}
-    `}>
+    <div className="min-h-screen flex flex-col bg-brand-50">
       
-      {/* Simulation Header (View Mode Toggle) - Only visible in "Desktop" container view */}
-      {viewMode === 'mobile' && (
-        <div className="absolute top-0 left-0 w-full h-6 bg-gray-800 flex justify-center items-center z-50 print:hidden">
-           <div className="w-16 h-1 bg-gray-600 rounded-full"></div>
-        </div>
-      )}
+      {/* Institutional Header */}
+      <header className="bg-brand-900 border-b border-brand-800 sticky top-0 z-50 shadow-md print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
+                <Shield className="text-white" size={24} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-bold text-lg leading-none tracking-wide uppercase">Acolher</span>
+                <span className="text-brand-300 text-[10px] uppercase tracking-wider">Informação e Proteção</span>
+              </div>
+            </Link>
 
-      {/* App Header */}
-      <header className="border-b-4 border-black bg-white p-4 sticky top-0 z-40 print:hidden">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            {/* Logo Placeholder */}
-            <div className="w-10 h-10 bg-black text-white flex items-center justify-center font-black text-xl">
-              VD
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              <NavLink to="/">Início</NavLink>
+              <NavLink to="/types">Tipos</NavLink>
+              <NavLink to="/signs">Sinais</NavLink>
+              <NavLink to="/help">Ajuda</NavLink>
+              <NavLink to="/map">Atendimento</NavLink>
+              <NavLink to="/faq">FAQ</NavLink>
+            </nav>
+
+            {/* Desktop Utility / Emergency */}
+            <div className="hidden lg:flex items-center gap-4">
+              <div className="h-6 w-px bg-brand-700"></div>
+              <Link to="/help">
+                <button className="bg-alert hover:bg-alert-hover text-white text-sm font-bold px-4 py-2 rounded shadow-sm transition-colors">
+                  EMERGÊNCIA 190
+                </button>
+              </Link>
             </div>
-            <span className="font-bold text-lg uppercase hidden md:block">Violência Doméstica</span>
-          </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex gap-2">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/types">Tipos</NavLink>
-            <NavLink to="/help">Ajuda</NavLink>
-            <NavLink to="/map">Mapa</NavLink>
-            <NavLink to="/legislation">Leis</NavLink>
-            <NavLink to="/faq">FAQ</NavLink>
-          </nav>
-
-          {/* Mobile Toggle & Accessibility Placeholder */}
-          <div className="flex items-center gap-4">
-             <div className="flex text-xs font-bold border border-black">
-                 <button className="px-2 hover:bg-gray-200">A+</button>
-                 <button className="px-2 hover:bg-gray-200 border-l border-black">A-</button>
-             </div>
-             
-             <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-               {isMobileMenuOpen ? <X /> : <Menu />}
-             </button>
+            {/* Mobile Toggle */}
+            <div className="lg:hidden">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white p-2 hover:bg-brand-800 rounded-md"
+              >
+                {isMobileMenuOpen ? <X /> : <Menu />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Nav Menu */}
+        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-4 border-t-2 border-black pt-2">
-            <NavLink to="/" mobile>Home</NavLink>
-            <NavLink to="/types" mobile>Tipos de Violência</NavLink>
-            <NavLink to="/help" mobile>Como Buscar Ajuda</NavLink>
-            <NavLink to="/map" mobile>Mapa de Serviços</NavLink>
-            <NavLink to="/legislation" mobile>Legislação</NavLink>
-            <NavLink to="/faq" mobile>Dúvidas Frequentes</NavLink>
-            <NavLink to="/contact" mobile>Contato</NavLink>
-            <NavLink to="/sitemap" mobile>Fluxo / Sitemap</NavLink>
-          </nav>
+          <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
+            <nav className="flex flex-col py-2">
+              <NavLink to="/" mobile>Início</NavLink>
+              <NavLink to="/types" mobile>Tipos de Violência</NavLink>
+              <NavLink to="/signs" mobile>Sinais e Indícios</NavLink>
+              <NavLink to="/help" mobile>Como Buscar Ajuda</NavLink>
+              <NavLink to="/map" mobile>Rede de Atendimento</NavLink>
+              <NavLink to="/legislation" mobile>Legislação e Direitos</NavLink>
+              <NavLink to="/faq" mobile>Dúvidas Frequentes</NavLink>
+            </nav>
+            <div className="p-4 bg-gray-50 border-t border-gray-100">
+              <Link to="/help" className="block">
+                 <button className="w-full bg-alert text-white font-bold py-3 rounded-lg shadow-sm">
+                   LIGAR PARA 190
+                 </button>
+              </Link>
+            </div>
+          </div>
         )}
       </header>
 
       {/* Main Content */}
-      <main className={`flex-1 p-6 ${viewMode === 'mobile' ? 'overflow-y-auto h-[700px] print:h-auto print:overflow-visible' : ''}`}>
+      <main className="flex-1">
         {children}
       </main>
 
-      {/* Chatbot Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50 print:hidden">
-         <button className="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,1),4px_4px_0px_2px_rgba(0,0,0,1)] hover:translate-y-1 transition-transform">
-             <MessageCircle size={24} />
-         </button>
-      </div>
+      {/* Institutional Footer */}
+      <footer className="bg-brand-900 text-white pt-12 pb-6 border-t-4 border-action print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            
+            <div className="col-span-1 md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <Shield className="text-brand-400" size={20} />
+                <span className="font-bold text-lg uppercase">Acolher</span>
+              </div>
+              <p className="text-brand-300 text-sm leading-relaxed">
+                Projeto de Extensão Universitária focado na conscientização e combate à violência doméstica através da informação.
+              </p>
+            </div>
 
-      {/* Wireframe Controls (Outside the app interface) */}
-      <div className="fixed bottom-4 left-4 flex gap-2 z-50 hidden md:flex print:hidden">
-         <button 
-           onClick={() => setViewMode('desktop')}
-           className={`p-2 border-2 border-black flex items-center gap-2 text-xs font-bold uppercase shadow-md ${viewMode === 'desktop' ? 'bg-black text-white' : 'bg-white'}`}
-         >
-           <Monitor size={16} /> Desktop
-         </button>
-         <button 
-           onClick={() => setViewMode('mobile')}
-           className={`p-2 border-2 border-black flex items-center gap-2 text-xs font-bold uppercase shadow-md ${viewMode === 'mobile' ? 'bg-black text-white' : 'bg-white'}`}
-         >
-           <Smartphone size={16} /> Mobile Sim
-         </button>
-      </div>
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-brand-400">Acesso Rápido</h4>
+              <ul className="space-y-2 text-sm text-brand-100">
+                <li><Link to="/types" className="hover:text-white hover:underline">Tipos de Violência</Link></li>
+                <li><Link to="/signs" className="hover:text-white hover:underline">Sinais de Alerta</Link></li>
+                <li><Link to="/help" className="hover:text-white hover:underline">Como Buscar Ajuda</Link></li>
+                <li><Link to="/map" className="hover:text-white hover:underline">Encontrar Serviços</Link></li>
+              </ul>
+            </div>
 
-      {/* Footer */}
-      <footer className="bg-black text-white p-4 text-center text-xs uppercase tracking-widest border-t-4 border-gray-500 print:hidden">
-        Projeto de Extensão - Protótipo de Baixa Fidelidade
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-brand-400">Institucional</h4>
+              <ul className="space-y-2 text-sm text-brand-100">
+                <li><Link to="/legislation" className="hover:text-white hover:underline">Legislação</Link></li>
+                <li><Link to="/sitemap" className="hover:text-white hover:underline">Mapa do Site</Link></li>
+                <li><a href="#" className="hover:text-white hover:underline">Política de Privacidade</a></li>
+                <li><a href="#" className="hover:text-white hover:underline">Sobre o Projeto</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-brand-400">Links Oficiais</h4>
+              <ul className="space-y-2 text-sm text-brand-100">
+                <li>
+                  <a href="https://www.gov.br/mdh/pt-br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    Ministério Direitos Humanos <ExternalLink size={12}/>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.cnj.jus.br/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    Conselho Nacional de Justiça <ExternalLink size={12}/>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          
+          <div className="border-t border-brand-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-500">
+            <p>&copy; {new Date().getFullYear()} Projeto Acolher. Todos os direitos reservados.</p>
+            <p className="text-center md:text-right">As informações contidas neste site não substituem o aconselhamento jurídico ou policial.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
@@ -144,11 +195,11 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/types" element={<Types />} />
+          <Route path="/signs" element={<Signs />} />
           <Route path="/help" element={<Help />} />
           <Route path="/legislation" element={<Legislation />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/docs" element={<Documentation />} />
         </Routes>

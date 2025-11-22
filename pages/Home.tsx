@@ -1,72 +1,151 @@
 import React from 'react';
-import { AlertTriangle, Phone, MapPin, Scale } from 'lucide-react';
-import { WTitle, WPlaceholder, WButton, WCard } from '../components/WireframeComponents';
+import { AlertTriangle, Phone, MapPin, Scale, Info, ChevronRight, ShieldAlert, PhoneCall } from 'lucide-react';
+import { PageContainer, Button, Card, SectionTitle, InfoBox } from '../components/WireframeComponents';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 gap-6">
-        {/* Hero Section */}
-        <section className="space-y-4">
-          <WPlaceholder height="h-64" label="Banner: Campanha de Conscientização" />
-          <div className="text-center space-y-2">
-            <h1 className="text-3xl font-black">COMBATE À VIOLÊNCIA DOMÉSTICA</h1>
-            <p className="text-gray-600 italic">"Frase de impacto sobre acolhimento e informação"</p>
-          </div>
-        </section>
+    <div className="space-y-12">
+      
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-brand-900 text-white py-20 md:py-28 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1600')" }}
+          aria-hidden="true"
+        ></div>
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-brand-900 via-brand-900/90 to-transparent"></div>
 
-        {/* Quick Actions - Identified as essential by Personas */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <WCard className="flex flex-col items-center text-center gap-3 hover:bg-gray-50 cursor-pointer">
-            <AlertTriangle size={40} />
-            <h3 className="font-bold text-lg">RECONHECER SINAIS</h3>
-            <p className="text-sm">Saiba identificar os tipos de violência.</p>
-            <WButton className="w-full mt-auto">Ver Tipos</WButton>
-          </WCard>
-          
-          <WCard className="flex flex-col items-center text-center gap-3 hover:bg-gray-50 cursor-pointer">
-            <Phone size={40} />
-            <h3 className="font-bold text-lg">BUSCAR AJUDA</h3>
-            <p className="text-sm">Canais de denúncia e passo a passo.</p>
-            <WButton className="w-full mt-auto" primary>Emergência</WButton>
-          </WCard>
-          
-          <WCard className="flex flex-col items-center text-center gap-3 hover:bg-gray-50 cursor-pointer">
-            <MapPin size={40} />
-            <h3 className="font-bold text-lg">REDE DE APOIO</h3>
-            <p className="text-sm">Encontre delegacias e centros de apoio próximos.</p>
-            <WButton className="w-full mt-auto">Ver Mapa</WButton>
-          </WCard>
-        </section>
-
-        {/* Legislation Highlight */}
-        <section className="border-t-2 border-black pt-6">
-          <div className="flex flex-col md:flex-row gap-6 items-center">
-            <div className="flex-1 space-y-4">
-              <h2 className="text-2xl font-bold flex items-center gap-2">
-                <Scale /> LEI MARIA DA PENHA
-              </h2>
-              <p className="text-justify">
-                [Resumo breve sobre a Lei 11.340/2006 e sua importância na proteção da mulher e punição do agressor. Link para texto completo.]
-              </p>
-              <WButton>Ler sobre seus direitos</WButton>
+        <PageContainer className="!py-0 relative z-20">
+          <div className="max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm font-medium text-blue-100 backdrop-blur-sm border border-white/10">
+              <Info size={16} />
+              <span>Informação é o primeiro passo para a proteção.</span>
             </div>
-            <div className="w-full md:w-1/3">
-              <WPlaceholder height="h-40" label="Infográfico: Ciclo da Violência" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white drop-shadow-lg">
+              Você não está sozinha. <br/>
+              <span className="text-blue-400">A lei protege você.</span>
+            </h1>
+            <p className="text-lg text-blue-50 max-w-2xl leading-relaxed drop-shadow-md font-medium">
+              Este portal reúne informações oficiais sobre como identificar a violência doméstica, buscar ajuda e acessar a rede de proteção do Estado.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link to="/help">
+                <Button variant="alert" size="lg" icon={PhoneCall} className="shadow-lg shadow-red-900/20">
+                  Como Buscar Ajuda
+                </Button>
+              </Link>
+              <Link to="/signs">
+                <Button variant="secondary" size="lg" icon={AlertTriangle} className="shadow-lg shadow-blue-900/20">
+                  Identificar Sinais
+                </Button>
+              </Link>
             </div>
           </div>
-        </section>
+        </PageContainer>
+      </section>
 
-        {/* Footer Placeholder inside page content for wireframe completeness */}
-        <div className="border-t-4 border-black mt-8 py-8 text-center bg-gray-100">
-          <p className="font-bold">RODAPÉ</p>
-          <p className="text-sm">Links Institucionais | Parceiros | Contato</p>
-          <div className="flex justify-center gap-4 mt-4">
-            <div className="w-8 h-8 border border-black bg-white rounded-full flex items-center justify-center text-xs">FB</div>
-            <div className="w-8 h-8 border border-black bg-white rounded-full flex items-center justify-center text-xs">IG</div>
+      <PageContainer>
+        
+        {/* Emergency Banner */}
+        <div className="bg-white rounded-xl shadow-xl border-l-8 border-alert overflow-hidden mb-12 transform -translate-y-6 md:-translate-y-10 relative z-30">
+          <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-red-100 p-3 rounded-full text-alert shrink-0 animate-pulse">
+                <ShieldAlert size={32} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Emergência Imediata?</h3>
+                <p className="text-gray-600 mt-1">
+                  Se você ou alguém está em risco de vida agora, acione a Polícia Militar.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 shrink-0">
+              <div className="text-center px-4">
+                <span className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Polícia Militar</span>
+                <span className="block text-3xl font-black text-brand-900">190</span>
+              </div>
+              <div className="h-10 w-px bg-gray-200"></div>
+              <div className="text-center px-4">
+                <span className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Central da Mulher</span>
+                <span className="block text-3xl font-black text-brand-900">180</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* Quick Navigation Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <Link to="/types" className="block group">
+            <Card className="h-full hover:border-action/30 transition-all duration-300 hover:shadow-lg">
+              <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center text-action mb-4 group-hover:bg-action group-hover:text-white transition-colors">
+                <Info size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-brand-900 mb-2 group-hover:text-action transition-colors">Tipos de Violência</h3>
+              <p className="text-gray-600 mb-4">Entenda as 5 formas de violência previstas na Lei Maria da Penha.</p>
+              <span className="text-action font-semibold text-sm flex items-center">Saiba mais <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" /></span>
+            </Card>
+          </Link>
+          
+          <Link to="/map" className="block group">
+            <Card className="h-full hover:border-action/30 transition-all duration-300 hover:shadow-lg">
+              <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center text-action mb-4 group-hover:bg-action group-hover:text-white transition-colors">
+                <MapPin size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-brand-900 mb-2 group-hover:text-action transition-colors">Rede de Atendimento</h3>
+              <p className="text-gray-600 mb-4">Encontre delegacias, centros de referência e casas abrigo.</p>
+              <span className="text-action font-semibold text-sm flex items-center">Ver serviços <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" /></span>
+            </Card>
+          </Link>
+          
+          <Link to="/legislation" className="block group">
+            <Card className="h-full hover:border-action/30 transition-all duration-300 hover:shadow-lg">
+              <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center text-action mb-4 group-hover:bg-action group-hover:text-white transition-colors">
+                <Scale size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-brand-900 mb-2 group-hover:text-action transition-colors">Seus Direitos</h3>
+              <p className="text-gray-600 mb-4">Conheça as Medidas Protetivas e o que a lei garante para sua segurança.</p>
+              <span className="text-action font-semibold text-sm flex items-center">Ler legislação <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" /></span>
+            </Card>
+          </Link>
+        </div>
+
+        {/* Educational Highlight */}
+        <div className="bg-white rounded-2xl p-8 md:p-0 flex flex-col md:flex-row gap-0 items-stretch shadow-md border border-gray-100 overflow-hidden">
+          <div className="flex-1 p-8 md:p-12 space-y-6 flex flex-col justify-center">
+            <h2 className="text-3xl font-bold text-brand-900">O Ciclo da Violência</h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              A violência doméstica muitas vezes segue um padrão cíclico: começa com o aumento da tensão, evolui para o ato de violência e é seguido por uma fase de "lua de mel" onde o agressor pede desculpas.
+            </p>
+            <p className="text-gray-700 text-lg">
+              Romper este ciclo é difícil, mas possível. O primeiro passo é reconhecer que ele existe.
+            </p>
+            <div>
+              <Link to="/signs">
+                <Button variant="outline" className="mt-2">Entenda os Sinais de Alerta</Button>
+              </Link>
+            </div>
+          </div>
+          <div className="w-full md:w-2/5 bg-brand-50 flex items-center justify-center p-8 relative">
+             {/* SVG Visualization of the Cycle */}
+             <div className="relative w-64 h-64 rounded-full border-4 border-brand-200 flex items-center justify-center bg-white shadow-sm z-10">
+                <div className="text-center">
+                  <div className="font-bold text-brand-900">CICLO</div>
+                  <div className="text-xs text-brand-500 uppercase tracking-widest">Repetitivo</div>
+                </div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Tensão</div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Lua de Mel</div>
+                <div className="absolute right-0 top-1/2 translate-x-6 -translate-y-1/2 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-alert border border-red-100">Explosão</div>
+             </div>
+             {/* Decorative circles */}
+             <div className="absolute top-10 right-10 w-20 h-20 bg-brand-200/50 rounded-full blur-xl"></div>
+             <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-200/50 rounded-full blur-xl"></div>
+          </div>
+        </div>
+
+      </PageContainer>
     </div>
   );
 };

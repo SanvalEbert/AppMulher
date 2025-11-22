@@ -1,86 +1,148 @@
 import React from 'react';
-import { WTitle, WCard, WButton } from '../components/WireframeComponents';
-import { PhoneCall, ShieldAlert, FileText, ChevronRight } from 'lucide-react';
+import { PageContainer, SectionTitle, Card, Button, InfoBox } from '../components/WireframeComponents';
+import { PhoneCall, ShieldAlert, FileText, MapPin, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Help: React.FC = () => {
   return (
-    <div>
-      <WTitle>Como Buscar Ajuda</WTitle>
+    <PageContainer>
+      <SectionTitle subtitle="Siga este guia seguro para proteger sua integridade e seus direitos.">
+        Como Buscar Ajuda
+      </SectionTitle>
 
       {/* Emergency Block */}
-      <div className="bg-black text-white p-6 border-2 border-black mb-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="bg-alert text-white rounded-xl p-6 md:p-8 shadow-lg mb-12 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex items-start gap-4">
+          <div className="bg-white/20 p-3 rounded-full shrink-0">
+            <ShieldAlert size={32} />
+          </div>
           <div>
-            <h2 className="text-2xl font-black text-white uppercase flex items-center gap-2">
-              <ShieldAlert /> Emergência Imediata
-            </h2>
-            <p className="text-sm mt-1">Se você corre risco de vida agora, não hesite.</p>
+            <h2 className="text-2xl font-bold mb-1">Risco Imediato?</h2>
+            <p className="text-red-100 text-lg">Se você está em perigo agora, ligue para a Polícia Militar.</p>
           </div>
-          <div className="flex gap-4">
-            <button className="bg-white text-black px-6 py-3 font-black text-xl border-2 border-white hover:bg-gray-200">
-              LIGUE 190 (PM)
-            </button>
-            <button className="bg-transparent text-white px-6 py-3 font-black text-xl border-2 border-white hover:bg-gray-800">
-              LIGUE 180 (Central)
-            </button>
-          </div>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+          <button className="flex-1 bg-white text-alert font-black text-xl px-8 py-4 rounded-lg shadow hover:bg-gray-100 transition-colors whitespace-nowrap">
+            LIGUE 190
+          </button>
+          <button className="flex-1 bg-transparent border-2 border-white text-white font-bold text-xl px-8 py-4 rounded-lg hover:bg-white/10 transition-colors whitespace-nowrap">
+            LIGUE 180
+          </button>
         </div>
       </div>
 
-      {/* Step by Step Flow */}
-      <h3 className="font-bold text-lg mb-4 border-l-4 border-black pl-2">PASSO A PASSO PARA DENÚNCIA</h3>
-      
-      <div className="space-y-6 relative before:absolute before:left-4 before:top-0 before:h-full before:w-0.5 before:bg-gray-300 before:-z-10 md:before:hidden">
-        <div className="grid md:grid-cols-3 gap-4">
-          {[
-            { step: "01", title: "Registro", text: "Dirija-se a uma Delegacia da Mulher (DEAM) ou delegacia comum para fazer o B.O." },
-            { step: "02", title: "Medida Protetiva", text: "Solicite medidas protetivas de urgência no momento do registro." },
-            { step: "03", title: "Acolhimento", text: "Busque um CRAS ou CREAS para apoio psicossocial e jurídico." }
-          ].map((item, idx) => (
-            <WCard key={idx} className="relative">
-              <div className="absolute -top-3 -left-3 bg-black text-white w-8 h-8 flex items-center justify-center font-bold border-2 border-white shadow-sm">
-                {item.step}
-              </div>
-              <h4 className="font-bold mt-2 mb-2 uppercase">{item.title}</h4>
-              <p className="text-sm text-gray-600">{item.text}</p>
-            </WCard>
-          ))}
-        </div>
-      </div>
-
-      {/* Post-Report Info */}
-      <div className="mt-8">
-        <WCard title="O que acontece após a denúncia?">
-          <ul className="list-disc list-inside space-y-2 text-sm mt-2">
-            <li>O juiz tem 48h para decidir sobre as medidas protetivas.</li>
-            <li>O agressor pode ser afastado do lar.</li>
-            <li>Você pode ser encaminhada para uma Casa Abrigo se necessário.</li>
-          </ul>
-          <div className="mt-4 flex justify-end">
-             <WButton className="flex items-center gap-2">
-               Ver Direitos da Vítima <ChevronRight size={16} />
-             </WButton>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        {/* Main Flow */}
+        <div className="lg:col-span-2">
+          
+          {/* Image Highlight for Mobile/Desktop */}
+          <div className="mb-8 rounded-xl overflow-hidden h-48 md:h-56 relative shadow-sm">
+             <div className="absolute inset-0 bg-brand-900/30 z-10"></div>
+             <img 
+               src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&q=80&w=1000" 
+               alt="Mãos dadas simbolizando apoio" 
+               className="w-full h-full object-cover object-center"
+             />
+             <div className="absolute bottom-4 left-6 z-20 text-white">
+               <p className="font-bold text-lg drop-shadow-md">Você não precisa passar por isso sozinha.</p>
+             </div>
           </div>
-        </WCard>
-      </div>
 
-       {/* Useful Contacts Block */}
-       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-         <WCard title="Contatos Úteis">
-           <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <PhoneCall size={16} /> <span>Defensoria Pública: 129</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <PhoneCall size={16} /> <span>Direitos Humanos: 100</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FileText size={16} /> <span>Delegacia Online (Link)</span>
-              </div>
-           </div>
-         </WCard>
-       </div>
-    </div>
+          <h3 className="text-xl font-bold text-brand-900 mb-6 flex items-center gap-2">
+            <span className="w-8 h-8 bg-brand-900 text-white rounded-full flex items-center justify-center text-sm">1</span>
+            Passo a Passo da Denúncia
+          </h3>
+
+          <div className="space-y-8 relative pl-8 border-l-2 border-gray-200 ml-4">
+            <div className="relative">
+              <div className="absolute -left-[41px] top-0 w-6 h-6 bg-action rounded-full border-4 border-white shadow-sm"></div>
+              <h4 className="text-lg font-bold text-brand-800 mb-2">Registro de Ocorrência</h4>
+              <p className="text-gray-600 mb-3">
+                Dirija-se a uma Delegacia Especializada de Atendimento à Mulher (DEAM). Se não houver uma na sua cidade, vá à Delegacia de Polícia Civil mais próxima.
+              </p>
+              <InfoBox icon={FileText} title="Leve seus documentos" type="info">
+                RG, CPF e, se possível, provas (mensagens, fotos, laudos médicos).
+              </InfoBox>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-[41px] top-0 w-6 h-6 bg-brand-400 rounded-full border-4 border-white shadow-sm"></div>
+              <h4 className="text-lg font-bold text-brand-800 mb-2">Solicite Medida Protetiva</h4>
+              <p className="text-gray-600">
+                No momento do boletim de ocorrência, peça explicitamente as Medidas Protetivas de Urgência. O juiz tem até 48 horas para decidir.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-[41px] top-0 w-6 h-6 bg-brand-400 rounded-full border-4 border-white shadow-sm"></div>
+              <h4 className="text-lg font-bold text-brand-800 mb-2">Exame de Corpo de Delito</h4>
+              <p className="text-gray-600">
+                Se houve violência física, a autoridade policial deve encaminhar você imediatamente para o exame pericial.
+              </p>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-brand-900 mt-12 mb-6 flex items-center gap-2">
+            <span className="w-8 h-8 bg-brand-900 text-white rounded-full flex items-center justify-center text-sm">2</span>
+            Pós-Denúncia: O que acontece?
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card className="bg-gray-50 border-none shadow-sm">
+              <h5 className="font-bold text-brand-900 mb-2">Afastamento</h5>
+              <p className="text-sm text-gray-600">O agressor pode ser obrigado a sair de casa e proibido de contatar você.</p>
+            </Card>
+            <Card className="bg-gray-50 border-none shadow-sm">
+              <h5 className="font-bold text-brand-900 mb-2">Acolhimento</h5>
+              <p className="text-sm text-gray-600">Você pode ser encaminhada para acompanhamento psicossocial no CREAS ou Casa Abrigo.</p>
+            </Card>
+          </div>
+
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          <div className="bg-brand-50 rounded-xl p-6 border border-brand-100">
+            <h4 className="font-bold text-brand-900 mb-4 flex items-center gap-2">
+              <PhoneCall size={20} /> Telefones Úteis
+            </h4>
+            <ul className="space-y-4">
+              <li className="flex justify-between items-center border-b border-brand-200 pb-2">
+                <span className="text-gray-700">Polícia Militar</span>
+                <span className="font-bold text-brand-900">190</span>
+              </li>
+              <li className="flex justify-between items-center border-b border-brand-200 pb-2">
+                <span className="text-gray-700">Central da Mulher</span>
+                <span className="font-bold text-brand-900">180</span>
+              </li>
+              <li className="flex justify-between items-center border-b border-brand-200 pb-2">
+                <span className="text-gray-700">Direitos Humanos</span>
+                <span className="font-bold text-brand-900">100</span>
+              </li>
+              <li className="flex justify-between items-center border-b border-brand-200 pb-2">
+                <span className="text-gray-700">Defensoria Pública</span>
+                <span className="font-bold text-brand-900">129</span>
+              </li>
+            </ul>
+          </div>
+
+          <Link to="/map" className="block">
+            <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all group">
+               <div className="flex items-center gap-3 mb-2 text-action">
+                 <MapPin size={24} />
+                 <span className="font-bold">Encontrar Serviços</span>
+               </div>
+               <p className="text-sm text-gray-600 mb-4">Localize a delegacia ou centro de apoio mais próximo de você.</p>
+               <span className="text-sm font-semibold text-brand-900 group-hover:text-action flex items-center gap-1">
+                 Acessar Mapa <ChevronRight size={16} />
+               </span>
+            </div>
+          </Link>
+        </div>
+
+      </div>
+    </PageContainer>
   );
 };
 
