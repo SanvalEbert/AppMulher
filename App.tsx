@@ -71,7 +71,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <NavLink to="/map">Mapa</NavLink>
             <NavLink to="/legislation">Leis</NavLink>
             <NavLink to="/faq">FAQ</NavLink>
-            <NavLink to="/docs">Docs</NavLink>
           </nav>
 
           {/* Mobile Toggle & Accessibility Placeholder */}
@@ -98,7 +97,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <NavLink to="/faq" mobile>Dúvidas Frequentes</NavLink>
             <NavLink to="/contact" mobile>Contato</NavLink>
             <NavLink to="/sitemap" mobile>Fluxo / Sitemap</NavLink>
-            <NavLink to="/docs" mobile>Documentação (Processo)</NavLink>
           </nav>
         )}
       </header>
