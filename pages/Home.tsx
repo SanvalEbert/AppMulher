@@ -1,6 +1,6 @@
 import React from 'react';
 import { AlertTriangle, Phone, MapPin, Scale, Info, ChevronRight, ShieldAlert, PhoneCall } from 'lucide-react';
-import { PageContainer, Button, Card, SectionTitle, InfoBox } from '../components/WireframeComponents';
+import { PageContainer, Button, Card, SectionTitle, InfoBox, BrandLogo } from '../components/WireframeComponents';
 import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
@@ -19,6 +19,9 @@ const Home: React.FC = () => {
 
         <PageContainer className="!py-0 relative z-20">
           <div className="max-w-3xl space-y-6">
+            <div className="mb-4 animate-fade-in-up">
+              <BrandLogo className="w-20 h-20 text-white opacity-90 drop-shadow-lg" />
+            </div>
             <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm font-medium text-blue-100 backdrop-blur-sm border border-white/10">
               <Info size={16} />
               <span>Informação é o primeiro passo para a proteção.</span>

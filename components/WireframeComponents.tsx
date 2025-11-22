@@ -1,6 +1,32 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
+// --- Brand Assets ---
+
+export const BrandLogo: React.FC<{ className?: string }> = ({ className = "w-10 h-10" }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* House Outline - Red */}
+    <path 
+      d="M50 10L15 40V90H85V40L50 10Z" 
+      stroke="currentColor" 
+      strokeWidth="8" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    />
+    {/* Fist - Red/Solid */}
+    <path 
+      d="M42 90V65C42 65 38 62 38 55C38 48 44 46 44 46C44 46 44 42 48 42C52 42 52 46 52 46C52 46 56 46 56 50C56 54 52 58 52 58V90H42Z" 
+      fill="currentColor"
+    />
+    <path 
+      d="M44 50H52" 
+      stroke="white" 
+      strokeWidth="2" 
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 // --- Typography ---
 
 export const SectionTitle: React.FC<{ children: React.ReactNode; subtitle?: string }> = ({ children, subtitle }) => (

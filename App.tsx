@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Shield, ExternalLink } from 'lucide-react';
+import { BrandLogo } from './components/WireframeComponents';
 
 // Import pages
 import Home from './pages/Home';
@@ -57,7 +58,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
               <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
-                <Shield className="text-white" size={24} />
+                <BrandLogo className="h-8 w-8 text-white" />
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-bold text-lg leading-none tracking-wide uppercase">Acolher</span>
@@ -132,7 +133,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <Shield className="text-brand-400" size={20} />
+                <BrandLogo className="h-6 w-6 text-brand-400" />
                 <span className="font-bold text-lg uppercase">Acolher</span>
               </div>
               <p className="text-brand-300 text-sm leading-relaxed">
