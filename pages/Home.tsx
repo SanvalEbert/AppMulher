@@ -115,15 +115,20 @@ const Home: React.FC = () => {
           </Link>
         </div>
 
-        {/* Educational Highlight */}
+        {/* Educational Highlight - Language Simplified per V&V */}
         <div className="bg-white rounded-2xl p-8 md:p-0 flex flex-col md:flex-row gap-0 items-stretch shadow-md border border-gray-100 overflow-hidden">
           <div className="flex-1 p-8 md:p-12 space-y-6 flex flex-col justify-center">
-            <h2 className="text-3xl font-bold text-brand-900">O Ciclo da Violência</h2>
+            <h2 className="text-3xl font-bold text-brand-900">Entendendo o Ciclo da Violência</h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              A violência doméstica muitas vezes segue um padrão cíclico: começa com o aumento da tensão, evolui para o ato de violência e é seguido por uma fase de "lua de mel" onde o agressor pede desculpas.
+              Muitas agressões seguem um padrão que se repete. Saber identificar essas fases ajuda a perceber o risco:
             </p>
+            <ul className="space-y-3 text-gray-700 text-lg">
+               <li><strong>1. Tensão:</strong> O agressor fica irritado, faz ameaças e humilhações. A mulher tenta "acalmar" a situação.</li>
+               <li><strong>2. Explosão:</strong> Acontece a agressão física ou verbal grave. É o momento de maior perigo.</li>
+               <li><strong>3. Lua de Mel:</strong> O agressor pede desculpas, diz que "perdeu a cabeça" e promete mudar.</li>
+            </ul>
             <p className="text-gray-700 text-lg">
-              Romper este ciclo é difícil, mas possível. O primeiro passo é reconhecer que ele existe.
+              Com o tempo, a fase de carinho diminui e as agressões ficam piores. 
             </p>
             <div>
               <Link to="/signs">

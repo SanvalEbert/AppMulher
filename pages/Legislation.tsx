@@ -1,8 +1,15 @@
 import React from 'react';
 import { PageContainer, SectionTitle, Card, Button } from '../components/WireframeComponents';
-import { BookOpen, ShieldCheck, Gavel, FileText, Download } from 'lucide-react';
+import { BookOpen, ShieldCheck, Gavel, FileText, Download, List, ArrowDown } from 'lucide-react';
 
 const Legislation: React.FC = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div>
        {/* Thematic Banner */}
@@ -21,9 +28,42 @@ const Legislation: React.FC = () => {
       <PageContainer>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
           
-          <div className="lg:col-span-2 space-y-8">
+          {/* Sidebar / Navigation Table of Contents */}
+          <div className="lg:col-span-1 lg:order-2 space-y-6">
+            <Card title="Navegação Rápida">
+               <ul className="space-y-2 text-sm">
+                 <li>
+                   <button onClick={() => scrollToSection('lei-maria')} className="flex items-center gap-2 text-brand-600 hover:text-action w-full text-left p-2 hover:bg-gray-50 rounded transition-colors">
+                     <List size={16} /> Lei Maria da Penha
+                   </button>
+                 </li>
+                 <li>
+                   <button onClick={() => scrollToSection('medidas')} className="flex items-center gap-2 text-brand-600 hover:text-action w-full text-left p-2 hover:bg-gray-50 rounded transition-colors">
+                     <ShieldCheck size={16} /> Medidas Protetivas
+                   </button>
+                 </li>
+                 <li>
+                   <button onClick={() => scrollToSection('cartilhas')} className="flex items-center gap-2 text-brand-600 hover:text-action w-full text-left p-2 hover:bg-gray-50 rounded transition-colors">
+                     <FileText size={16} /> Cartilhas e Manuais
+                   </button>
+                 </li>
+               </ul>
+            </Card>
+
+            <div className="bg-brand-900 text-white p-6 rounded-xl">
+              <h4 className="font-bold mb-2">Dúvidas Jurídicas?</h4>
+              <p className="text-sm text-blue-200 mb-4">
+                A Defensoria Pública oferece assistência jurídica gratuita.
+              </p>
+              <div className="font-bold text-2xl mb-1">Ligue 129</div>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-2 lg:order-1 space-y-8">
+            
             {/* Main Law Highlight */}
-            <section className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+            <section id="lei-maria" className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 scroll-mt-28">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-brand-100 text-brand-900 rounded-lg">
                   <BookOpen size={24} />
@@ -55,7 +95,7 @@ const Legislation: React.FC = () => {
             </section>
 
             {/* Protective Measures */}
-            <section>
+            <section id="medidas" className="scroll-mt-28">
                <h3 className="text-xl font-bold text-brand-900 mb-6 flex items-center gap-2">
                  <ShieldCheck className="text-action" /> Medidas Protetivas de Urgência
                </h3>
@@ -82,36 +122,28 @@ const Legislation: React.FC = () => {
                  </Card>
                </div>
             </section>
-          </div>
 
-          {/* Sidebar Resources */}
-          <div className="space-y-6">
-            <Card title="Cartilhas e Materiais">
+            {/* Downloads Section */}
+            <section id="cartilhas" className="bg-gray-50 p-6 rounded-xl border border-gray-200 scroll-mt-28">
+              <h3 className="text-lg font-bold text-brand-900 mb-4">Cartilhas e Materiais Oficiais</h3>
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 cursor-pointer transition-colors">
+                <div className="flex items-center justify-between p-3 bg-white rounded border border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors shadow-sm">
                   <div className="flex items-center gap-3">
                     <FileText size={18} className="text-gray-400" />
-                    <span className="text-sm font-medium text-gray-700">Cartilha Simplificada</span>
+                    <span className="text-sm font-medium text-gray-700">Cartilha Simplificada Lei Maria da Penha</span>
                   </div>
                   <Download size={16} className="text-brand-500" />
                 </div>
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 cursor-pointer transition-colors">
+                <div className="flex items-center justify-between p-3 bg-white rounded border border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors shadow-sm">
                   <div className="flex items-center gap-3">
                     <FileText size={18} className="text-gray-400" />
-                    <span className="text-sm font-medium text-gray-700">Manual Polícia Civil</span>
+                    <span className="text-sm font-medium text-gray-700">Protocolo de Atendimento Polícia Civil</span>
                   </div>
                   <Download size={16} className="text-brand-500" />
                 </div>
               </div>
-            </Card>
+            </section>
 
-            <div className="bg-brand-900 text-white p-6 rounded-xl">
-              <h4 className="font-bold mb-2">Dúvidas Jurídicas?</h4>
-              <p className="text-sm text-blue-200 mb-4">
-                A Defensoria Pública oferece assistência jurídica gratuita.
-              </p>
-              <div className="font-bold text-2xl mb-1">Ligue 129</div>
-            </div>
           </div>
 
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Shield, ExternalLink } from 'lucide-react';
+import { Menu, X, Shield, ExternalLink, Phone } from 'lucide-react';
 import { BrandLogo } from './components/WireframeComponents';
 
 // Import pages
@@ -48,7 +48,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }, [location]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-50">
+    <div className="min-h-screen flex flex-col bg-brand-50 relative">
       
       {/* Institutional Header */}
       <header className="bg-brand-900 border-b border-brand-800 sticky top-0 z-50 shadow-md print:hidden">
@@ -69,7 +69,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
               <NavLink to="/">Início</NavLink>
-              <NavLink to="/types">Tipos</NavLink>
+              {/* Updated Menu Name per V&V Report */}
+              <NavLink to="/types">Tipos e Conceitos</NavLink>
               <NavLink to="/signs">Sinais</NavLink>
               <NavLink to="/help">Ajuda</NavLink>
               <NavLink to="/map">Atendimento</NavLink>
@@ -103,7 +104,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
             <nav className="flex flex-col py-2">
               <NavLink to="/" mobile>Início</NavLink>
-              <NavLink to="/types" mobile>Tipos de Violência</NavLink>
+              <NavLink to="/types" mobile>Tipos e Conceitos</NavLink>
               <NavLink to="/signs" mobile>Sinais e Indícios</NavLink>
               <NavLink to="/help" mobile>Como Buscar Ajuda</NavLink>
               <NavLink to="/map" mobile>Rede de Atendimento</NavLink>
@@ -125,6 +126,21 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <main className="flex-1">
         {children}
       </main>
+
+      {/* STICKY FLOATING BUTTON - High Priority Requirement */}
+      <div className="fixed bottom-6 right-6 z-50 print:hidden animate-fade-in">
+        <a href="tel:180" className="group flex items-center justify-center">
+           <div className="bg-brand-900 text-white rounded-full shadow-xl p-4 pr-6 flex items-center gap-3 border-4 border-white hover:bg-brand-800 transition-all transform hover:scale-105">
+              <div className="bg-white text-brand-900 p-2 rounded-full animate-pulse">
+                <Phone size={24} fill="currentColor" />
+              </div>
+              <div className="flex flex-col items-start">
+                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Central Mulher</span>
+                <span className="text-xl font-black leading-none">LIGUE 180</span>
+              </div>
+           </div>
+        </a>
+      </div>
 
       {/* Institutional Footer */}
       <footer className="bg-brand-900 text-white pt-12 pb-6 border-t-4 border-action print:hidden">
