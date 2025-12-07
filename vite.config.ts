@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: '/wireframes/', // ← ADICIONADO PARA O DEPLOY FUNCIONAR
+    base: '/AppMulher/', // ← ATUALIZADO APÓS RENOMEAR O REPOSITÓRIO
 
     server: {
       port: 3000,
