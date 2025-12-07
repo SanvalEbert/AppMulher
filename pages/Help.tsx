@@ -32,43 +32,17 @@ const Help: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         
         {/* Main Flow */}
         <div className="lg:col-span-2">
-          
-          {/* Image Highlight - Replaced with High-Fi CSS Composition (Hand + Red X) */}
-          <div className="mb-8 rounded-xl overflow-hidden h-48 md:h-64 relative shadow-lg bg-gray-900 border border-gray-200 group">
-             {/* 1. Background Image: Hand (Black and White) */}
+          {/* Image Highlight - SUBSTITUÍDO PELA IMAGEM FORNECIDA PELO USUÁRIO */}
+          <div className="mb-8 rounded-xl overflow-hidden h-48 md:h-64 relative shadow-lg border border-gray-200">
              <img 
-               src="https://images.unsplash.com/photo-1589756450858-b077179b5245?q=80&w=1200&auto=format&fit=crop&saturation=-100" 
-               alt="Sinal de pare com a mão - Campanha Sinal Vermelho" 
-               className="absolute inset-0 w-full h-full object-cover opacity-40 object-center"
+               src="/AppMulher/images/sinal_vermelho.png" 
+               alt="Sinal vermelho contra a violência doméstica" 
+               className="w-full h-full object-cover object-center"
              />
-             
-             {/* 2. Contrast Layer */}
-             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
-             
-             {/* 3. Graphic Elements */}
-             <div className="absolute inset-0 flex items-center justify-between px-6 md:px-12">
-                
-                {/* Left Text */}
-                <div className="border-l-4 border-white pl-6 z-10">
-                   <h2 className="text-3xl md:text-5xl font-black text-white leading-none tracking-tight uppercase drop-shadow-xl font-sans">
-                     Violência<br/>
-                     <span className="text-white">Contra a</span><br/>
-                     Mulher
-                   </h2>
-                   <p className="text-white/90 mt-3 text-lg font-medium drop-shadow-md">Você não precisa passar por isso sozinha.</p>
-                </div>
-
-                {/* Red X */}
-                <div className="relative z-10 pr-4 md:pr-8">
-                   <div className="text-red-600 font-bold text-8xl md:text-9xl opacity-90 rotate-12 select-none drop-shadow-lg mix-blend-lighten" style={{ fontFamily: 'sans-serif' }}>
-                     X
-                   </div>
-                </div>
-             </div>
           </div>
 
           <h3 className="text-xl font-bold text-brand-900 mb-6 flex items-center gap-2">
