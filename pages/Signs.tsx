@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PageContainer, SectionTitle, Card, InfoBox, Button } from '../components/WireframeComponents';
 import { AlertTriangle, Search, UserX, Lock, MicOff } from 'lucide-react';
@@ -42,37 +41,13 @@ const Signs: React.FC = () => {
           </SectionTitle>
         </div>
         
-        {/* Visual Context Image - Recriando o design enviado pelo usuário com CSS de Alta Fidelidade */}
-        <div className="w-full lg:w-1/3 min-h-[280px] rounded-xl overflow-hidden relative shadow-lg group border border-gray-200 bg-gray-900">
-          {/* 1. Imagem de fundo: Mão em sinal de pare (Preto e Branco) */}
+        {/* Visual Context Image - SUBSTITUÍDO PELA IMAGEM FORNECIDA PELO USUÁRIO */}
+        <div className="w-full lg:w-1/3 min-h-[280px] rounded-xl overflow-hidden relative shadow-lg group border border-gray-200">
           <img 
-            src="https://images.unsplash.com/photo-1589756450858-b077179b5245?q=80&w=800&auto=format&fit=crop&saturation=-100" 
-            alt="Sinal de pare com a mão" 
-            className="absolute inset-0 w-full h-full object-cover opacity-50 object-center"
+            src="/AppMulher/images/mulher_sozinha.png" 
+            alt="Mulher sentada sozinha no sofá, abraçando os joelhos" 
+            className="w-full h-full object-cover object-center"
           />
-          
-          {/* 2. Camada de Contraste */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
-          
-          {/* 3. Elementos Gráficos (Texto e X) */}
-          <div className="absolute inset-0 flex items-center justify-between p-6">
-             
-             {/* Texto Esquerdo com Barra Vertical */}
-             <div className="border-l-4 border-white pl-4 z-10">
-                <h2 className="text-3xl font-black text-white leading-none tracking-tight uppercase drop-shadow-xl font-sans">
-                  Violência<br/>
-                  <span className="text-white">Contra a</span><br/>
-                  Mulher
-                </h2>
-             </div>
-
-             {/* X Vermelho (Posicionado sobre a palma da mão visualmente) */}
-             <div className="relative z-10 pr-4 pt-12">
-                <div className="text-red-600 font-bold text-8xl opacity-90 rotate-12 select-none drop-shadow-md" style={{ fontFamily: 'sans-serif' }}>
-                  X
-                </div>
-             </div>
-          </div>
         </div>
       </div>
 
