@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-github-pages
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -15,6 +19,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,11 +39,19 @@ jobs:
         run: pnpm run build
 
       - name: Copy build to docs folder
-        run: cp -r dist/* docs/
+        run: |
+          mkdir -p docs
+          rm -rf docs/*
+          cp -r dist/* docs/
 
-      - name: Commit and push changes
+      - name: Commit and push generated site
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add docs/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update docs folder with latest build" && git push)
+          if git diff --staged --quiet; then
+            echo "No generated changes to publish."
+          else
+            git commit -m "chore: publish updated Portal Acolher"
+            git push origin HEAD:main
+          fi
