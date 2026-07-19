@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Shield, ExternalLink, Phone } from 'lucide-react';
+import { Menu, X, ExternalLink, Phone } from 'lucide-react';
 import { BrandLogo } from './components/WireframeComponents';
 
 // Import pages
@@ -13,6 +13,8 @@ import MapPage from './pages/Map';
 import FAQ from './pages/FAQ';
 import Sitemap from './pages/Sitemap';
 import Documentation from './pages/Documentation';
+import Privacy from './pages/Privacy';
+import About from './pages/About';
 
 const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolean; onClick?: () => void }> = ({ to, children, mobile, onClick }) => {
   const location = useLocation();
@@ -56,7 +58,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="flex justify-between items-center h-16">
             
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group" aria-label="Ir para a página inicial do Portal Acolher">
               <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
                 <BrandLogo className="h-8 w-8 text-white" />
               </div>
@@ -67,9 +69,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1" aria-label="Navegação principal">
               <NavLink to="/">Início</NavLink>
-              {/* Updated Menu Name per V&V Report */}
               <NavLink to="/types">Tipos e Conceitos</NavLink>
               <NavLink to="/signs">Sinais</NavLink>
               <NavLink to="/help">Ajuda</NavLink>
@@ -80,18 +81,23 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Desktop Utility / Emergency */}
             <div className="hidden lg:flex items-center gap-4">
               <div className="h-6 w-px bg-brand-700"></div>
-              <Link to="/help">
-                <button className="bg-alert hover:bg-alert-hover text-white text-sm font-bold px-4 py-2 rounded shadow-sm transition-colors">
-                  EMERGÊNCIA 190
-                </button>
-              </Link>
+              <a
+                href="tel:190"
+                aria-label="Ligar para a Polícia Militar pelo número 190"
+                className="bg-alert hover:bg-alert-hover text-white text-sm font-bold px-4 py-2 rounded shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-900"
+              >
+                LIGAR 190
+              </a>
             </div>
 
             {/* Mobile Toggle */}
             <div className="lg:hidden">
               <button 
+                type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-white p-2 hover:bg-brand-800 rounded-md"
+                className="text-white p-2 hover:bg-brand-800 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+                aria-expanded={isMobileMenuOpen}
+                aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               >
                 {isMobileMenuOpen ? <X /> : <Menu />}
               </button>
@@ -102,7 +108,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
-            <nav className="flex flex-col py-2">
+            <nav className="flex flex-col py-2" aria-label="Navegação móvel">
               <NavLink to="/" mobile>Início</NavLink>
               <NavLink to="/types" mobile>Tipos e Conceitos</NavLink>
               <NavLink to="/signs" mobile>Sinais e Indícios</NavLink>
@@ -112,11 +118,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <NavLink to="/faq" mobile>Dúvidas Frequentes</NavLink>
             </nav>
             <div className="p-4 bg-gray-50 border-t border-gray-100">
-              <Link to="/help" className="block">
-                 <button className="w-full bg-alert text-white font-bold py-3 rounded-lg shadow-sm">
-                   LIGAR PARA 190
-                 </button>
-              </Link>
+              <a
+                href="tel:190"
+                aria-label="Ligar para a Polícia Militar pelo número 190"
+                className="block w-full bg-alert text-white text-center font-bold py-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-alert focus:ring-offset-2"
+              >
+                LIGAR PARA 190
+              </a>
             </div>
           </div>
         )}
@@ -129,13 +137,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* STICKY FLOATING BUTTON - High Priority Requirement */}
       <div className="fixed bottom-6 right-6 z-50 print:hidden animate-fade-in">
-        <a href="tel:180" className="group flex items-center justify-center">
+        <a href="tel:180" aria-label="Ligar para a Central de Atendimento à Mulher pelo número 180" className="group flex items-center justify-center">
            <div className="bg-brand-900 text-white rounded-full shadow-xl p-4 pr-6 flex items-center gap-3 border-4 border-white hover:bg-brand-800 transition-all transform hover:scale-105">
               <div className="bg-white text-brand-900 p-2 rounded-full animate-pulse">
                 <Phone size={24} fill="currentColor" />
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Central Mulher</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Central da Mulher</span>
                 <span className="text-xl font-black leading-none">LIGUE 180</span>
               </div>
            </div>
@@ -153,7 +161,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <span className="font-bold text-lg uppercase">Acolher</span>
               </div>
               <p className="text-brand-300 text-sm leading-relaxed">
-                Projeto de Extensão Universitária focado na conscientização e combate à violência doméstica através da informação.
+                Portal de informação e proteção sobre violência doméstica, desenvolvido como produto de extensão universitária.
               </p>
             </div>
 
@@ -172,8 +180,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <ul className="space-y-2 text-sm text-brand-100">
                 <li><Link to="/legislation" className="hover:text-white hover:underline">Legislação</Link></li>
                 <li><Link to="/sitemap" className="hover:text-white hover:underline">Mapa do Site</Link></li>
-                <li><a href="#" className="hover:text-white hover:underline">Política de Privacidade</a></li>
-                <li><a href="#" className="hover:text-white hover:underline">Sobre o Projeto</a></li>
+                <li><Link to="/privacy" className="hover:text-white hover:underline">Política de Privacidade</Link></li>
+                <li><Link to="/about" className="hover:text-white hover:underline">Sobre o Projeto</Link></li>
               </ul>
             </div>
 
@@ -181,8 +189,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-brand-400">Links Oficiais</h4>
               <ul className="space-y-2 text-sm text-brand-100">
                 <li>
-                  <a href="https://www.gov.br/mdh/pt-br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
-                    Ministério Direitos Humanos <ExternalLink size={12}/>
+                  <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    Ligue 180 — Ministério das Mulheres <ExternalLink size={12}/>
                   </a>
                 </li>
                 <li>
@@ -196,8 +204,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
           
           <div className="border-t border-brand-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-500">
-            <p>&copy; {new Date().getFullYear()} Projeto Acolher. Todos os direitos reservados.</p>
-            <p className="text-center md:text-right">As informações contidas neste site não substituem o aconselhamento jurídico ou policial.</p>
+            <p>&copy; {new Date().getFullYear()} Portal Acolher. Todos os direitos reservados.</p>
+            <p className="text-center md:text-right">As informações contidas neste site não substituem o atendimento jurídico, policial, de saúde ou assistência social.</p>
           </div>
         </div>
       </footer>
@@ -219,6 +227,8 @@ const App: React.FC = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/docs" element={<Documentation />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Layout>
     </Router>
