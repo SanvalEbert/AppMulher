@@ -1,5 +1,5 @@
 {
-  "name": "Projeto de Extensão - Violência Doméstica",
-  "description": "Protótipos de baixa fidelidade para o site informativo sobre violência doméstica, baseado no levantamento da Etapa 2 do projeto de extensão.",
+  "name": "Acolher — Informação e Proteção sobre Violência Doméstica",
+  "description": "Aplicação web responsiva desenvolvida como produto de extensão universitária para conscientização, orientação e acesso a canais oficiais de atendimento sobre violência doméstica.",
   "requestFramePermissions": []
 }

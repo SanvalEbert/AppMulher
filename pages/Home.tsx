@@ -1,6 +1,6 @@
 import React from 'react';
-import { AlertTriangle, Phone, MapPin, Scale, Info, ChevronRight, ShieldAlert, PhoneCall } from 'lucide-react';
-import { PageContainer, Button, Card, SectionTitle, InfoBox, BrandLogo } from '../components/WireframeComponents';
+import { AlertTriangle, MapPin, Scale, Info, ChevronRight, ShieldAlert, PhoneCall } from 'lucide-react';
+import { PageContainer, Button, Card, BrandLogo } from '../components/WireframeComponents';
 import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
@@ -65,16 +65,23 @@ const Home: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 shrink-0">
-              <div className="text-center px-4">
+            <div className="flex items-stretch gap-3 shrink-0 w-full sm:w-auto">
+              <a
+                href="tel:190"
+                aria-label="Ligar para a Polícia Militar pelo número 190"
+                className="flex-1 sm:flex-none text-center px-5 py-3 rounded-lg border border-gray-200 hover:border-alert hover:bg-red-50 transition-colors focus:outline-none focus:ring-2 focus:ring-alert"
+              >
                 <span className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Polícia Militar</span>
                 <span className="block text-3xl font-black text-brand-900">190</span>
-              </div>
-              <div className="h-10 w-px bg-gray-200"></div>
-              <div className="text-center px-4">
+              </a>
+              <a
+                href="tel:180"
+                aria-label="Ligar para a Central de Atendimento à Mulher pelo número 180"
+                className="flex-1 sm:flex-none text-center px-5 py-3 rounded-lg border border-gray-200 hover:border-action hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-action"
+              >
                 <span className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Central da Mulher</span>
                 <span className="block text-3xl font-black text-brand-900">180</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -123,12 +130,12 @@ const Home: React.FC = () => {
               Muitas agressões seguem um padrão que se repete. Saber identificar essas fases ajuda a perceber o risco:
             </p>
             <ul className="space-y-3 text-gray-700 text-lg">
-               <li><strong>1. Tensão:</strong> O agressor fica irritado, faz ameaças e humilhações. A mulher tenta "acalmar" a situação.</li>
-               <li><strong>2. Explosão:</strong> Acontece a agressão física ou verbal grave. É o momento de maior perigo.</li>
-               <li><strong>3. Lua de Mel:</strong> O agressor pede desculpas, diz que "perdeu a cabeça" e promete mudar.</li>
+              <li><strong>1. Tensão:</strong> O agressor fica irritado, faz ameaças e humilhações. A mulher tenta "acalmar" a situação.</li>
+              <li><strong>2. Explosão:</strong> Acontece a agressão física ou verbal grave. É o momento de maior perigo.</li>
+              <li><strong>3. Lua de Mel:</strong> O agressor pede desculpas, diz que "perdeu a cabeça" e promete mudar.</li>
             </ul>
             <p className="text-gray-700 text-lg">
-              Com o tempo, a fase de carinho diminui e as agressões ficam piores. 
+              Com o tempo, a fase de carinho diminui e as agressões ficam piores.
             </p>
             <div>
               <Link to="/signs">
@@ -137,19 +144,17 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="w-full md:w-2/5 bg-brand-50 flex items-center justify-center p-8 relative">
-             {/* SVG Visualization of the Cycle */}
-             <div className="relative w-64 h-64 rounded-full border-4 border-brand-200 flex items-center justify-center bg-white shadow-sm z-10">
-                <div className="text-center">
-                  <div className="font-bold text-brand-900">CICLO</div>
-                  <div className="text-xs text-brand-500 uppercase tracking-widest">Repetitivo</div>
-                </div>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Tensão</div>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Lua de Mel</div>
-                <div className="absolute right-0 top-1/2 translate-x-6 -translate-y-1/2 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-alert border border-red-100">Explosão</div>
-             </div>
-             {/* Decorative circles */}
-             <div className="absolute top-10 right-10 w-20 h-20 bg-brand-200/50 rounded-full blur-xl"></div>
-             <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-200/50 rounded-full blur-xl"></div>
+            <div className="relative w-64 h-64 rounded-full border-4 border-brand-200 flex items-center justify-center bg-white shadow-sm z-10">
+              <div className="text-center">
+                <div className="font-bold text-brand-900">CICLO</div>
+                <div className="text-xs text-brand-500 uppercase tracking-widest">Repetitivo</div>
+              </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Tensão</div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-4 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-brand-700 border border-brand-100">Lua de Mel</div>
+              <div className="absolute right-0 top-1/2 translate-x-6 -translate-y-1/2 bg-white px-3 py-1 rounded-full shadow-sm font-bold text-sm text-alert border border-red-100">Explosão</div>
+            </div>
+            <div className="absolute top-10 right-10 w-20 h-20 bg-brand-200/50 rounded-full blur-xl"></div>
+            <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-200/50 rounded-full blur-xl"></div>
           </div>
         </div>
 
