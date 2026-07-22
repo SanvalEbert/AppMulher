@@ -3,6 +3,8 @@ import { PageContainer, SectionTitle, Card, InfoBox } from '../components/Wirefr
 import { PhoneCall, ShieldAlert, FileText, MapPin, ChevronRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const HELP_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/9/93/Red_hand.svg';
+
 const Help: React.FC = () => {
   return (
     <PageContainer>
@@ -43,11 +45,14 @@ const Help: React.FC = () => {
         
         {/* Main Flow */}
         <div className="lg:col-span-2">
-          <div className="mb-8 rounded-xl overflow-hidden h-48 md:h-64 relative shadow-lg border border-gray-200">
+          {/* Imagem em domínio público: Wikimedia Commons / mjchael */}
+          <div className="mb-8 rounded-xl overflow-hidden h-48 md:h-64 relative shadow-lg border border-gray-200 bg-white flex items-center justify-center p-6">
             <img 
-              src={`${import.meta.env.BASE_URL}images/sinal_vermelho.png`}
-              alt="Campanha do sinal vermelho contra a violência doméstica" 
-              className="w-full h-full object-cover object-center"
+              src={HELP_IMAGE_URL}
+              alt="Símbolo de uma mão vermelha representando um pedido de ajuda e de interrupção da violência" 
+              className="w-full h-full object-contain object-center"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
