@@ -3,6 +3,8 @@ import { PageContainer, SectionTitle, Card, InfoBox, Button } from '../component
 import { AlertTriangle, Search, UserX, Lock, MicOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const SIGNS_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Free_image_to_use_for_domestic_abuse_victims_f9ree_picture_public_domain_domesti_woman_human_rights_%2824%29_01.jpg';
+
 const Signs: React.FC = () => {
   const signs = [
     {
@@ -41,12 +43,14 @@ const Signs: React.FC = () => {
           </SectionTitle>
         </div>
         
-        {/* Visual Context Image - SUBSTITUÍDO PELA IMAGEM FORNECIDA PELO USUÁRIO */}
-        <div className="w-full lg:w-1/3 min-h-[280px] rounded-xl overflow-hidden relative shadow-lg group border border-gray-200">
+        {/* Imagem CC0: Wikimedia Commons / Commonpersoon */}
+        <div className="w-full lg:w-1/3 min-h-[280px] rounded-xl overflow-hidden relative shadow-lg group border border-gray-200 bg-gray-100">
           <img 
-            src="/images/mulher_sozinha.png" 
-            alt="Mulher sentada sozinha no sofá, abraçando os joelhos" 
+            src={SIGNS_IMAGE_URL}
+            alt="Imagem de conscientização sobre violência doméstica, representando uma mulher em situação de vulnerabilidade"
             className="w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
