@@ -15,23 +15,25 @@ import Sitemap from './pages/Sitemap';
 import Documentation from './pages/Documentation';
 import Privacy from './pages/Privacy';
 import About from './pages/About';
+import NotFound from './pages/NotFound';
 
 const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolean; onClick?: () => void }> = ({ to, children, mobile, onClick }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
-  
-  const baseStyles = "text-sm font-medium transition-colors duration-200";
-  const desktopStyles = isActive 
-    ? "text-white bg-brand-800 px-3 py-2 rounded-md shadow-sm" 
-    : "text-brand-100 hover:text-white hover:bg-brand-800/50 px-3 py-2 rounded-md";
-  const mobileStyles = isActive 
-    ? "block w-full text-left px-4 py-3 bg-brand-50 text-brand-900 font-bold border-l-4 border-brand-900" 
-    : "block w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-brand-900 border-l-4 border-transparent";
+
+  const baseStyles = 'text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const desktopStyles = isActive
+    ? 'text-white bg-brand-800 px-3 py-2 rounded-md shadow-sm focus:ring-white focus:ring-offset-brand-900'
+    : 'text-brand-100 hover:text-white hover:bg-brand-800/50 px-3 py-2 rounded-md focus:ring-white focus:ring-offset-brand-900';
+  const mobileStyles = isActive
+    ? 'block w-full text-left px-4 py-3 bg-brand-50 text-brand-900 font-bold border-l-4 border-brand-900 focus:ring-brand-900 focus:ring-inset'
+    : 'block w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-brand-900 border-l-4 border-transparent focus:ring-brand-900 focus:ring-inset';
 
   return (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       onClick={onClick}
+      aria-current={isActive ? 'page' : undefined}
       className={`${mobile ? mobileStyles : desktopStyles} ${baseStyles}`}
     >
       {children}
@@ -41,24 +43,43 @@ const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolea
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Close mobile menu on route change
   const location = useLocation();
+
+  // Fecha o menu e leva a nova página para o início após a troca de rota.
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
   }, [location]);
 
+  // Permite fechar o menu móvel pelo teclado.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-50 relative">
-      
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-brand-900 focus:px-4 focus:py-3 focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-action"
+      >
+        Pular para o conteúdo principal
+      </a>
+
       {/* Institutional Header */}
       <header className="bg-brand-900 border-b border-brand-800 sticky top-0 z-50 shadow-md print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group" aria-label="Ir para a página inicial do Portal Acolher">
+            <Link to="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-white rounded-lg" aria-label="Ir para a página inicial do Portal Acolher">
               <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
                 <BrandLogo className="h-8 w-8 text-white" />
               </div>
@@ -80,7 +101,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             {/* Desktop Utility / Emergency */}
             <div className="hidden lg:flex items-center gap-4">
-              <div className="h-6 w-px bg-brand-700"></div>
+              <div className="h-6 w-px bg-brand-700" aria-hidden="true" />
               <a
                 href="tel:190"
                 aria-label="Ligar para a Polícia Militar pelo número 190"
@@ -92,14 +113,15 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             {/* Mobile Toggle */}
             <div className="lg:hidden">
-              <button 
+              <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-white p-2 hover:bg-brand-800 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
                 aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-navigation"
                 aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               >
-                {isMobileMenuOpen ? <X /> : <Menu />}
+                {isMobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
               </button>
             </div>
           </div>
@@ -107,7 +129,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
+          <div id="mobile-navigation" className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
             <nav className="flex flex-col py-2" aria-label="Navegação móvel">
               <NavLink to="/" mobile>Início</NavLink>
               <NavLink to="/types" mobile>Tipos e Conceitos</NavLink>
@@ -131,22 +153,24 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 pb-20 sm:pb-24 focus:outline-none">
         {children}
       </main>
 
-      {/* STICKY FLOATING BUTTON - High Priority Requirement */}
-      <div className="fixed bottom-6 right-6 z-50 print:hidden animate-fade-in">
-        <a href="tel:180" aria-label="Ligar para a Central de Atendimento à Mulher pelo número 180" className="group flex items-center justify-center">
-           <div className="bg-brand-900 text-white rounded-full shadow-xl p-4 pr-6 flex items-center gap-3 border-4 border-white hover:bg-brand-800 transition-all transform hover:scale-105">
-              <div className="bg-white text-brand-900 p-2 rounded-full animate-pulse">
-                <Phone size={24} fill="currentColor" />
-              </div>
-              <div className="flex flex-col items-start">
-                <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Central da Mulher</span>
-                <span className="text-xl font-black leading-none">LIGUE 180</span>
-              </div>
-           </div>
+      {/* Acesso persistente ao Ligue 180, em formato compacto para reduzir sobreposição de conteúdo. */}
+      <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-40 print:hidden animate-fade-in">
+        <a
+          href="tel:180"
+          aria-label="Ligar para a Central de Atendimento à Mulher pelo número 180"
+          className="group inline-flex items-center gap-2 sm:gap-3 rounded-full bg-brand-900 text-white p-2 sm:p-2.5 sm:pr-4 shadow-lg ring-2 ring-white hover:bg-brand-800 transition-colors focus:outline-none focus:ring-4 focus:ring-action focus:ring-offset-2"
+        >
+          <span className="bg-white text-brand-900 p-2 rounded-full shrink-0" aria-hidden="true">
+            <Phone className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" />
+          </span>
+          <span className="flex flex-col items-start pr-1">
+            <span className="hidden sm:block text-[9px] font-bold uppercase tracking-wider text-brand-100">Central de Atendimento à Mulher</span>
+            <span className="text-sm sm:text-base font-black leading-tight">LIGUE 180</span>
+          </span>
         </a>
       </div>
 
@@ -154,7 +178,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <footer className="bg-brand-900 text-white pt-12 pb-6 border-t-4 border-action print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            
             <div className="col-span-1 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <BrandLogo className="h-6 w-6 text-brand-400" />
@@ -190,19 +213,18 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <ul className="space-y-2 text-sm text-brand-100">
                 <li>
                   <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
-                    Ligue 180 — Ministério das Mulheres <ExternalLink size={12}/>
+                    Ligue 180 — Ministério das Mulheres <ExternalLink size={12} aria-hidden="true" />
                   </a>
                 </li>
                 <li>
                   <a href="https://www.cnj.jus.br/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
-                    Conselho Nacional de Justiça <ExternalLink size={12}/>
+                    Conselho Nacional de Justiça <ExternalLink size={12} aria-hidden="true" />
                   </a>
                 </li>
               </ul>
             </div>
-
           </div>
-          
+
           <div className="border-t border-brand-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-500">
             <p>&copy; {new Date().getFullYear()} Portal Acolher. Todos os direitos reservados.</p>
             <p className="text-center md:text-right">As informações contidas neste site não substituem o atendimento jurídico, policial, de saúde ou assistência social.</p>
@@ -229,6 +251,7 @@ const App: React.FC = () => {
           <Route path="/docs" element={<Documentation />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>
