@@ -78,8 +78,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* Institutional Header */}
       <header className="bg-brand-900 border-b border-brand-800 sticky top-0 z-50 shadow-md print:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 lg:h-20">
             {/* Logo */}
             <Link
               to="/"
@@ -89,7 +89,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <img
                 src={BRAND_LOGO_URL}
                 alt="Acolher — Informação e Proteção"
-                className="h-9 sm:h-10 lg:h-11 w-auto max-w-[190px] sm:max-w-[215px] lg:max-w-[235px]"
+                className="h-10 sm:h-11 lg:h-14 w-auto max-w-[220px] sm:max-w-[245px] lg:max-w-[300px]"
               />
             </Link>
 
