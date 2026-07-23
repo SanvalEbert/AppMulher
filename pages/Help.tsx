@@ -6,6 +6,8 @@ import { PageContainer, SectionTitle, Card, InfoBox } from '../components/Wirefr
 const HELP_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/9/93/Red_hand.svg';
 
 const Help: React.FC = () => {
+  const [helpImageError, setHelpImageError] = React.useState(false);
+
   return (
     <PageContainer>
       <SectionTitle subtitle="Siga este guia seguro para proteger sua integridade e seus direitos.">
@@ -44,20 +46,21 @@ const Help: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Main Flow */}
         <div className="lg:col-span-2">
-          {/* Símbolo em domínio público: Wikimedia Commons / mjchael. O texto mantém o sentido mesmo se a imagem externa falhar. */}
+          {/* Símbolo em domínio público: Wikimedia Commons / mjchael. O ícone local é exibido apenas se a imagem externa falhar. */}
           <aside className="mb-8 rounded-2xl bg-red-50 px-5 py-5 sm:px-7 sm:py-6 flex items-center gap-5 sm:gap-6" aria-label="Mensagem de acolhimento">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm">
-              <ShieldAlert className="absolute w-9 h-9 text-alert" aria-hidden="true" />
-              <img
-                src={HELP_IMAGE_URL}
-                alt=""
-                className="relative w-14 h-14 sm:w-16 sm:h-16 object-contain"
-                loading="lazy"
-                decoding="async"
-                onError={(event) => {
-                  event.currentTarget.style.display = 'none';
-                }}
-              />
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm">
+              {!helpImageError ? (
+                <img
+                  src={HELP_IMAGE_URL}
+                  alt=""
+                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setHelpImageError(true)}
+                />
+              ) : (
+                <ShieldAlert className="w-9 h-9 text-alert" aria-hidden="true" />
+              )}
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-alert mb-1">Rede de proteção</p>
