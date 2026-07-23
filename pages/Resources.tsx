@@ -9,6 +9,7 @@ import {
   Scale,
   ShieldCheck,
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { PageContainer, SectionTitle } from '../components/WireframeComponents';
 
 type Resource = {
@@ -17,7 +18,7 @@ type Resource = {
   description: string;
   url: string;
   scope: string;
-  icon: React.ComponentType<{ size?: number; className?: string; 'aria-hidden'?: boolean }>;
+  icon: LucideIcon;
 };
 
 type ResourceGroup = {
