@@ -50,6 +50,28 @@
         scroll-behavior: smooth;
       }
       
+      /* A assinatura horizontal precisa de mais presença que o antigo símbolo compacto. */
+      
+      header img[alt="Acolher — Informação e Proteção"] {
+        height: 44px !important;
+        width: auto !important;
+        max-width: 240px !important;
+      }
+      
+      @media (min-width: 640px) {
+        header img[alt="Acolher — Informação e Proteção"] {
+          height: 48px !important;
+          max-width: 270px !important;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        header img[alt="Acolher — Informação e Proteção"] {
+          height: 52px !important;
+          max-width: 295px !important;
+        }
+      }
+      
       @media print {
         body {
           background: white !important;
