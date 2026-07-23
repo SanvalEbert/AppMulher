@@ -10,6 +10,7 @@ import Help from './pages/Help';
 import Legislation from './pages/Legislation';
 import MapPage from './pages/Map';
 import FAQ from './pages/FAQ';
+import Resources from './pages/Resources';
 import Sitemap from './pages/Sitemap';
 import Documentation from './pages/Documentation';
 import Privacy from './pages/Privacy';
@@ -79,7 +80,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Institutional Header */}
       <header className="bg-brand-900 border-b border-brand-800 sticky top-0 z-50 shadow-md print:hidden">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 lg:h-20">
+          <div className="flex justify-between items-center h-16 xl:h-20">
             {/* Logo */}
             <Link
               to="/"
@@ -89,22 +90,23 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <img
                 src={BRAND_LOGO_URL}
                 alt="Acolher — Informação e Proteção"
-                className="h-10 sm:h-11 lg:h-14 w-auto max-w-[220px] sm:max-w-[245px] lg:max-w-[300px]"
+                className="h-10 sm:h-11 xl:h-14 w-auto max-w-[220px] sm:max-w-[245px] xl:max-w-[300px]"
               />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1" aria-label="Navegação principal">
+            <nav className="hidden xl:flex items-center gap-1" aria-label="Navegação principal">
               <NavLink to="/">Início</NavLink>
               <NavLink to="/types">Tipos e Conceitos</NavLink>
               <NavLink to="/signs">Sinais</NavLink>
               <NavLink to="/help">Ajuda</NavLink>
               <NavLink to="/map">Atendimento</NavLink>
+              <NavLink to="/resources">Recursos</NavLink>
               <NavLink to="/faq">FAQ</NavLink>
             </nav>
 
             {/* Desktop Utility / Emergency */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden xl:flex items-center gap-4">
               <div className="h-6 w-px bg-brand-700" aria-hidden="true" />
               <a
                 href="tel:190"
@@ -116,7 +118,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </div>
 
             {/* Mobile Toggle */}
-            <div className="lg:hidden">
+            <div className="xl:hidden">
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -133,13 +135,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div id="mobile-navigation" className="lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
+          <div id="mobile-navigation" className="xl:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full z-50">
             <nav className="flex flex-col py-2" aria-label="Navegação móvel">
               <NavLink to="/" mobile>Início</NavLink>
               <NavLink to="/types" mobile>Tipos e Conceitos</NavLink>
               <NavLink to="/signs" mobile>Sinais e Indícios</NavLink>
               <NavLink to="/help" mobile>Como Buscar Ajuda</NavLink>
               <NavLink to="/map" mobile>Rede de Atendimento</NavLink>
+              <NavLink to="/resources" mobile>Recursos e Sites Confiáveis</NavLink>
               <NavLink to="/legislation" mobile>Legislação e Direitos</NavLink>
               <NavLink to="/faq" mobile>Dúvidas Frequentes</NavLink>
             </nav>
@@ -207,6 +210,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <li><Link to="/signs" className="hover:text-white hover:underline">Sinais de Alerta</Link></li>
                 <li><Link to="/help" className="hover:text-white hover:underline">Como Buscar Ajuda</Link></li>
                 <li><Link to="/map" className="hover:text-white hover:underline">Encontrar Serviços</Link></li>
+                <li><Link to="/resources" className="hover:text-white hover:underline">Recursos e Sites Confiáveis</Link></li>
               </ul>
             </div>
 
@@ -258,6 +262,7 @@ const App: React.FC = () => {
           <Route path="/help" element={<Help />} />
           <Route path="/legislation" element={<Legislation />} />
           <Route path="/map" element={<MapPage />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/docs" element={<Documentation />} />
