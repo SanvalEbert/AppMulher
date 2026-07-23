@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ExternalLink, Phone } from 'lucide-react';
-import { BrandLogo } from './components/WireframeComponents';
 
 // Import pages
 import Home from './pages/Home';
@@ -16,6 +15,9 @@ import Documentation from './pages/Documentation';
 import Privacy from './pages/Privacy';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+
+const BRAND_LOGO_URL = `${import.meta.env.BASE_URL}brand/acolher-logo-header.svg`;
+const BRAND_SYMBOL_DARK_URL = `${import.meta.env.BASE_URL}brand/acolher-symbol-dark.svg`;
 
 const NavLink: React.FC<{ to: string; children: React.ReactNode; mobile?: boolean; onClick?: () => void }> = ({ to, children, mobile, onClick }) => {
   const location = useLocation();
@@ -79,14 +81,16 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-white rounded-lg" aria-label="Ir para a página inicial do Portal Acolher">
-              <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
-                <BrandLogo className="h-8 w-8 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-lg leading-none tracking-wide uppercase">Acolher</span>
-                <span className="text-brand-300 text-[10px] uppercase tracking-wider">Informação e Proteção</span>
-              </div>
+            <Link
+              to="/"
+              className="flex items-center shrink-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-900"
+              aria-label="Ir para a página inicial do Portal Acolher"
+            >
+              <img
+                src={BRAND_LOGO_URL}
+                alt="Acolher — Informação e Proteção"
+                className="h-9 sm:h-10 lg:h-11 w-auto max-w-[190px] sm:max-w-[215px] lg:max-w-[235px]"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -179,9 +183,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <BrandLogo className="h-6 w-6 text-brand-400" />
-                <span className="font-bold text-lg uppercase">Acolher</span>
+              <div className="flex items-center gap-3 mb-4">
+                <img
+                  src={BRAND_SYMBOL_DARK_URL}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-10 w-10 shrink-0"
+                />
+                <div className="flex flex-col leading-none">
+                  <span className="font-bold text-lg uppercase">Acolher</span>
+                  <span className="text-[9px] uppercase tracking-[0.18em] text-[#E87968] mt-1">Informação e Proteção</span>
+                </div>
               </div>
               <p className="text-brand-300 text-sm leading-relaxed">
                 Portal de informação e proteção sobre violência doméstica, desenvolvido como produto de extensão universitária.
