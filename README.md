@@ -4,7 +4,7 @@ Aplicação web responsiva desenvolvida como produto da atividade de extensão *
 
 ## Acesso ao portal
 
-**Site publicado:** https://sanvalebert.github.io/AppMulher/
+**Site publicado:** https://acolhermulher.com.br
 
 ## Objetivo
 
