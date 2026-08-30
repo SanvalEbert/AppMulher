@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: '/AppMulher/', // ← ATUALIZADO APÓS RENOMEAR O REPOSITÓRIO
+    base: '/',
 
     server: {
       port: 3000,
